@@ -1,44 +1,16 @@
- pragma solidity >=0.4.21 <0.6.0;
- 
-import "github.com/provable-things/ethereum-api/provableAPI.sol";
+  pragma solidity >=0.4.21 <0.6.0;
  import "./RegistrationSc.sol";
  import "./Token.sol";
- contract TransferOwnership is Registration, Tokenis, usingProvable
+ contract TransferOwnership is Registration, Token
  {
      Registration public r1;
      Token public r2;
       constructor(Registration addr,Token addr1) public {
         r1 = addr;
         r2 = addr1;
-        update();
-        //calculateResult = 0;
     }
-     //uint public dieselPriceUSD;
-
-    event LogNewalice(string result);
-    event LogNewProvableQuery(string description);
-
-    
-
-    function __callback(
-        bytes32 _myid,
-       string memory _result,
-        bytes memory _proof
-    )
-        public
-    {
-        require(msg.sender == provable_cbAddress());
-      emit LogNewalice(_result);
-      
-    }
-
-    function update()
-        public
-        payable
-    {
-        emit LogNewProvableQuery("Provable query was sent, standing by for the answer...");
-        provable_query("URL", "json(http://ec2-13-232-39-95.ap-south-1.compute.amazonaws.com:5000/alice).result");
-    }
+     string ciphertext;
+    string data_id;
   struct track_data {
         uint _previous_owner_id;
         string _previous_owner_name;
@@ -51,35 +23,28 @@ import "github.com/provable-things/ethereum-api/provableAPI.sol";
     }
     mapping(uint => track_data) public tracks;
  
- 
- function transferOwnership_data(uint[] user1_id ,uint user2_id, uint[] data_id,uint[] token_id)  public returns(uint,uint) {
-     uint tokenide = r2.createToken(user1_id, data_id,token_id);
-     
-    
-        //require(msg.sender == products[prod_id]._product_owner);
-       
-        //track_product  trk;
-        uint transfer_id = _t_id;
+ function transfer(uint user1, uint user2, uint[] dataid, uint[] tokenid) public returns(uint,uint)
+ {
+     uint tokenidew = r2.createto(user1,dataid,tokenid);
+      uint transfer_id = _t_id;
         uint token1_id=1;
-        //event test_value(uint256 indexed value1);
-        //test_value(p1._userType);
-        for(uint i=0;i<user1_id.length;i++)
-        {
-        User  p1 =  Users[user1_id[i]];
-        User  p2 = Users[user2_id];
+        uint i=1;
+     
+        User  p1 =  Users[user1];
+        User  p2 = Users[user2];
         if((keccak256(p1._userType) == keccak256("Owner") && keccak256(p2._userType)==keccak256("CurrentOwner")) ||
         (keccak256(p1._userType) == keccak256("CurrentOwner") && keccak256(p2._userType)==keccak256("CurrentOwner"))
         ){
             //tracks[transfer_id]._data_id =data_id[i];
-            tracks[transfer_id]._token_id =tokenide;
-            tracks[transfer_id]._owner_id = user2_id;
+            tracks[transfer_id]._token_id =tokenidew;
+            tracks[transfer_id]._owner_id = user2;
             //tracks[transfer_id]._owner_name=Users[user2_id]._userName;
             tracks[transfer_id]._timeStamp = now;
-            tracks[transfer_id]._previous_owner_id = user1_id[i];
+            tracks[transfer_id]._previous_owner_id = user1;
             //tracks[transfer_id]._previous_owner_name=Users[user1_id[i]]._userName;
-            datas[data_id[i]]._owner_id = user2_id;
-            datas[data_id[i]].trace_ids.push(transfer_id);
-            datas[data_id[i]]._owner_ids.push(user2_id);
+            datas[dataid[i]]._owner_id = user2;
+            datas[dataid[i]].trace_ids.push(transfer_id);
+            datas[dataid[i]]._owner_ids.push(user2);
             transfer_id = _t_id++;
             token1_id = token1_id+1;
             return (transfer_id,token1_id);
@@ -88,37 +53,34 @@ import "github.com/provable-things/ethereum-api/provableAPI.sol";
             return (0,0);
         }
     }
- }
-   /* function getProduct_track(uint prod_id)  public  returns (track_product[]) {
-       
-        uint track_len = tracks[prod_id].length;
-       string[] memory trcks = new string[](track_len);
-       for(uint i=0;i<track_len;i++){
-           track_product t = tracks[prod_id][i];
-           
-           trcks.push(t._product_id+""+t._owner_id+""+t._product_owner+""+t._timeStamp);
-       }
-       // track_product tk =tracks[prod_id];
-         return trcks;
-    }*/
-    
 
-    function getdata_tracking_ids(uint data_id)  public  returns (uint [] memory) {
+  
+
+    function getdata_tracking_ids(uint data_id)  public  returns (uint [] memory) 
+    {
        
         //product memory p = products[p_id];
         return datas[data_id].trace_ids;
     }
    
     function getdata_trackindes(uint t_id)  public  returns (uint,string,uint,string,uint) {
-        //track_product memory t = tracks[t_id];
-        //p.trace_ids;
+        
          return (tracks[t_id]._previous_owner_id,tracks[t_id]._previous_owner_name,tracks[t_id]._owner_id,tracks[t_id]._owner_name,tracks[t_id]._timeStamp);
     }
    
-   /* function getProduct_chainLength(uint prod_id) public returns (uint) {
-        return tracks.length();
-    }*/
+  
+   function get_datahash(uint did) public returns (string)
+   {
+       datas[did]._data_hash;
+   }
+    
+    function getDataCipher() public view returns(string memory) {
+        return ciphertext;
+    }
    
     
+    function setCypherData(string memory mciphertext) public {
+        ciphertext = mciphertext;
+    }
    
 }
