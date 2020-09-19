@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#reencmsgId").click(function () {
+                $.get("http://localhost:5000/proxy/rencrypted", function (data, status) {
+                    var reencryptmsg = data.reencryptmsg;
+                    var encr_emphkey = data.encr_emphkey;
+                    $("#reencmsg").val(reencryptmsg);
+                    $("#encempconskeyId").val(encr_emphkey);
+                });
+            });
+            $("#discmsgId").click(function () {
+              var dataid = $("#dataids").val();
+            //  var encr_emphkey = $("#plain_textid").val();
+                $.get("http://localhost:5000/proxy/displaykey", function (data, status) {
+                    //var regenkeybd = data.regenkeybd;
+                    var ciphertext = data.ciphertext;
+                    //var encr_emphkey = data.encr_emphkey;
+                    // $("#regenkeyid").val(regenkeybd);
+                    $("#ciphertextid").val(ciphertext);
+                    // $("#empheenckeyid").val(encr_emphkey);
+                });
+            });
+            $("#discmsgId").click(function () {
+              var regenkeybd = $("#apub_key").val();
+              var encr_emphkey = $("#plain_textid").val();
+                $.get("http://localhost:5000/proxy/displaykey", function (data, status) {
+                    //var regenkeybd = data.regenkeybd;
+                    var ciphertext = data.ciphertext;
+                    //var encr_emphkey = data.encr_emphkey;
+                    $("#regenkeyid").val(regenkeybd);
+                    $("#ciphertextid").val(ciphertext);
+                    $("#empheenckeyid").val(encr_emphkey);
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h1 style="text-align:center;color:green;font-family:Algerian;font-size:250%;"> Proxy Key Generation and Distribution </h1>
+    <br />
+    <br />
+    <div class="container" style="position: absolute;margin-left: 350px;">
+      <div class="row">
+          <div class="col-lg-6">
+              <div class="row">
+                  <div class="col-lg-5">
+                      <input type="button" class="btn btn-primary" id="discmsgId" value="Display Key" />
+                  </div>
+
+                  <div class="col-lg-5">
+                        Data Id:&nbsp;&nbsp; <input type="text" class="form-control"
+                           id="dataids" style="width: 250px;" />
+                        CipherText:&nbsp;&nbsp; <input type="text" class="form-control"
+                           id="ciphertextid" style="width: 250px;" readonly />
+                      <!-- Re Generated Key:&nbsp;&nbsp; <input type="text" class="form-control" id="regenkeyid"
+                          style="width: 250px;" />
+                      Empheral Encryt Key:&nbsp;&nbsp; <input type="text" class="form-control"
+                          id="empheenckeyid" style="width: 250px;" /> -->
+                          Re Generated Key:&nbsp;&nbsp; <input type="text" class="form-control" id="regenkeyid"
+                              style="width: 250px;" />
+                          Empheral Encryt Key:&nbsp;&nbsp; <input type="text" class="form-control"
+                              id="empheenckeyid" style="width: 250px;" />
+                  </div>
+              </div>
+        <!-- <div class="row">
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <input type="button" class="btn btn-primary" id="discmsgId" value="Display Key" />
+                    </div>
+
+                    <div class="col-lg-5">
+                       CipherText:&nbsp;&nbsp; <input type="text" class="form-control"
+                          id="ciphertextid" style="width: 250px;" readonly />
+                        Re Generated Key:&nbsp;&nbsp; <input type="text" class="form-control" id="regenkeyid"
+                            style="width: 250px;" />
+                        Empheral Encryt Key:&nbsp;&nbsp; <input type="text" class="form-control"
+                            id="empheenckeyid" style="width: 250px;" />
+                    </div>
+                </div> -->
+                <br/>
+                <br/>
+                <div class="row">
+                    <div class="col-lg-5">
+                        <input type="button" class="btn btn-primary" id="reencmsgId" value="De Crypt Text Generate" />
+                    </div>
+
+                    <div class="col-lg-5">
+                        Re Encrypted Msg:&nbsp;&nbsp; <input type="text" class="form-control" id="reencmsg"
+                            style="width: 250px;" readonly />
+                        Encrypted Empheral Cons Key:&nbsp;&nbsp; <input type="text" class="form-control"
+                            id="encempconskeyId" style="width: 250px;" readonly />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
