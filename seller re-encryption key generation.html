@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#suplkeyid").click(function () {
+                $.get("http://localhost:5000/suplier/genkey", function (data, status) {
+                    var priv_key = data.spriv_key;
+                    var pub_key = data.spub_key;
+                    $("#apriv_key").val(priv_key);
+                    $("#apub_key").val(pub_key);
+                });
+            });
+            // $("#encryptid").click(function () {
+            //     var pub_key = $("#apub_key").val();
+            //     var plain_text = $("#plain_textid").val();
+            //     $.post("http://localhost:5000/encrypt/text", { 'text': plain_text, 'own_key': pub_key }, function (data, status) {
+            //         var ciphertext = data.ciphertext;
+            //         $("#cipher_textid").val(ciphertext);
+            //     });
+            // });
+            $("#reKeyGenId").click(function () {
+                var reci_key = $("#recKeyId").val();
+                var priv_key = $("#apriv_key").val();
+                $.post("http://localhost:5000/suplier/rekeygeneration", { 'rec_key': reci_key, 'own_key': priv_key }, function (data, status) {
+                    var reencrytedkey = data.reencrytedkey;
+                    var encr_emphkey = data.encr_emphkey;
+                    $("#regen_key").val(reencrytedkey);
+                    $("#emgenKey_key").val(encr_emphkey);
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h1 style="text-align:center;color:green;font-family:Algerian;font-size:250%;"> Re-encrypt Key Generation </h1>
+    <br />
+    <br />
+    <div class="container" style="position: absolute;margin-left: 350px;">
+        <!-- <div class="row">
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <input type="button" class="btn" id="suplkeyid" value="Seller Key Generation" />
+                    </div>
+                    <div class="col-lg-5">
+                        Private Key:&nbsp;&nbsp; <input type="text" class="form-control" id="apriv_key"
+                            style="width: 250px;" readonly />
+                        <br />
+                        Public Key:&nbsp;&nbsp;<input type="text" class="form-control" id="apub_key"
+                            style="width: 250px;" readonly />
+                    </div>
+                </div> -->
+                <br />
+                <!-- <div class="row">
+                    <div class="col-lg-5">
+                        <input type="button" class="btn btn-default" id="encryptid" value="Encrypt Text" />
+                    </div>
+                    <div class="col-lg-5">
+                        Plain Text:&nbsp;&nbsp; <input type="text" class="form-control" id="plain_textid"
+                            style="width: 250px;" />
+                        <br />
+                        Cipher Text:&nbsp;&nbsp; <input type="text" class="form-control" id="cipher_textid"
+                            style="width: 250px;" readonly />
+                    </div>
+                </div> -->
+                <br />
+                <br />
+                <div class="row">
+                    <div class="col-lg-5">
+                        <input type="button" class="btn btn-primary" id="reKeyGenId" value="Re Key Generate" />
+                    </div>
+                    <div class="col-lg-5">
+                      Owner Key:&nbsp;&nbsp; <input type="text" class="form-control" id="apriv_key"
+                          style="width: 250px;" />
+                      <br />
+                        Recieptant Key:&nbsp;&nbsp; <input type="text" class="form-control" id="recKeyId"
+                            style="width: 250px;" />
+                        <br />
+                        Re Generated Key:&nbsp;&nbsp; <input type="text" class="form-control" id="regen_key"
+                            style="width: 250px;" readonly />
+                        <br />
+                        Empheral Encrypt Key:&nbsp;&nbsp;<input type="text" class="form-control" id="emgenKey_key"
+                            style="width: 250px;" readonly />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
