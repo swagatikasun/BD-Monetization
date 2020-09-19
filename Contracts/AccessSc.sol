@@ -1,8 +1,7 @@
 pragma solidity >=0.4.21 <0.6.0;
 
 import "./RegistrationSc.sol";
-import "github.com/provable-things/ethereum-api/provableAPI.sol";
-contract AccessControl is Registration, usingProvable {
+contract AccessControl is Registration{
      uint public a;
      //uint public requiredlookupId=100;
    
@@ -22,7 +21,8 @@ contract AccessControl is Registration, usingProvable {
         dc = Registration(data);
     }
    
-   
+   string reencryptedmsg;
+    string empheralencryptedkey;
    
     function get_interactionId(uint lookup_id1) public returns (bytes32,uint,uint,uint,uint,uint){
          uint b_id;
@@ -101,12 +101,6 @@ contract AccessControl is Registration, usingProvable {
         lookups[lookup_id].interactionId=hash;
          lookups[lookup_id]._timeStamp=now;
          lookups[lookup_id].flag=1;
-        
-         //
-        //d_id;
-        //uint b_id;
-        //uint selected_id;
-        //uint lookup_Id;
         verifylookups[lookup_id].d_id=dataid;
         verifylookups[lookup_id].b_id=buyerId;
         verifylookups[lookup_id].selected_id=selectedOwnerid;
@@ -116,20 +110,19 @@ contract AccessControl is Registration, usingProvable {
         lookup_id++;
         return lookup_id;
     }
-    /*
-     function get_data_hash(uint hhi,bytes32 interactionId ) public view returns (string){
-     string data_hash;
-     uint d_id;
-    (data_hash)= dc.datas[d_id]._data_hash;
-     return (data_hash);
+     
+    function getDataReEncrpMsg() public view returns(string memory) {
+        return reencryptedmsg;
     }
-    */
-    function update()
-        public
-        payable
-    {
-        //emit LogNewProvableQuery("Provable query was sent, standing by for the answer...");
-        provable_query("URL", "xml(http://ec2-13-232-39-95.ap-south-1.compute.amazonaws.com:5000/alice).result");
+    
+    function getDataEncryKey() public view returns(string memory) {
+        return empheralencryptedkey;
+    }
+    
+    
+    function setData(string memory mreencryptedmsg,string memory mempheralencryptedkey) public {
+        empheralencryptedkey = mempheralencryptedkey;
+        reencryptedmsg = mreencryptedmsg;
     }
 }
 
