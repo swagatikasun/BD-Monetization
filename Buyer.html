@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#buyerkeyid").click(function () {
+                $.get("http://localhost:5000/consumer/genkey", function (data, status) {
+                    var priv_key = data.cpriv_key;
+                    var pub_key = data.cpub_key;
+                    $("#bpriv_key").val(priv_key);
+                    $("#bpub_key").val(pub_key);
+                });
+            });
+            $("#decrTextId").click(function () {
+                var priv_key = $("#bpriv_key").val();
+                $.post("http://localhost:5000/decrypt", {'rec_key': priv_key }, function (data, status) {
+                    var plaintext = data.plaintext;
+                    $("#plaintextId").val(plaintext.substring(1, plaintext.length - 1));
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+  <h1 style="text-align:center;color:green;font-family:Algerian;font-size:250%;"> Decryption by Buyer </h1>
+    <br />
+    <br />
+    <div class="container" style="position: absolute;margin-left: 350px;">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <input type="button" class="btn" id="buyerkeyid" value="Buyer Key Generation" />
+                    </div>
+                    <div class="col-lg-5">
+                        Private Key:&nbsp;&nbsp; <input type="text" class="form-control" id="bpriv_key"
+                            style="width: 250px;" readonly />
+                        <br />
+                        Public Key:&nbsp;&nbsp;<input type="text" class="form-control" id="bpub_key"
+                            style="width: 250px;" readonly />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-5">
+                        <input type="button" class="btn btn-primary" id="decrTextId" value="De Crypt Text Generate" />
+                    </div>
+                    <div class="col-lg-5">
+                        <br />
+                        Plain Text:&nbsp;&nbsp; <input type="text" class="form-control" id="plaintextId"
+                            style="width: 250px;" readonly />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
