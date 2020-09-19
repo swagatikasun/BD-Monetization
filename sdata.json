@@ -1,0 +1,51 @@
+{
+    "abi": [
+	{
+		"inputs": [
+	{
+		"inputs": [],
+		"name": "getDataEncryKey",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getDataReEncrpMsg",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "mreencryptedmsg",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "mempheralencryptedkey",
+				"type": "string"
+			}
+		],
+		"name": "setData",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+],
+    "contract_address": "0x6fA10c317Df248B1C5a9b7fE8449F3EC820e9F76"
+}
