@@ -11,8 +11,9 @@ Proxy re-encryption is a set of algorithms which allows an untrusted proxy to tr
 In order to perform encryption of IPFS-hashes (during registration of watermarked-data) and their proxy re-encryption (during Data Transfer and Access Control), we used `npre' library which requires `libssl-dev` and `libgmp-dev` as its pre-requisites.
 
 ### ***Installation***
-```
+
 Proxy re-encryption on docker
+```
 1. First docker terminal
 - docker run -it --detach --name ubuntucon -p 5000:5000 ubuntu:latest
 - docker start ubuntucon           (docker start ubuntucon && docker attach ubuntucon)
