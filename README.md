@@ -12,7 +12,7 @@ In order to perform encryption of IPFS-hashes (during registration of watermarke
 
 ### ***Installation***
 
-Proxy re-encryption on docker
+
 ```
 1. First docker terminal
 - docker run -it --detach --name ubuntucon -p 5000:5000 ubuntu:latest
