@@ -11,28 +11,29 @@ Proxy re-encryption is a set of algorithms which allows an untrusted proxy to tr
 In order to perform encryption of IPFS-hashes (during registration of watermarked-data) and their proxy re-encryption (during Data Transfer and Access Control), we used `npre' library which requires `libssl-dev` and `libgmp-dev` as its pre-requisites.
 
 ### ***Installation***
+```
 Proxy re-encryption on docker
-First docker terminal
-
-docker run -it --detach --name ubuntucon -p 5000:5000 ubuntu:latest
-docker start ubuntucon           (docker start ubuntucon && docker attach ubuntucon)
-apt update
-apt upgrade
-apt-get install build-essential
-apt-get install python3
-apt install python3-pip
-apt-get install python3-dev libssl-dev libgmp-dev
-pip install Flask-RESTful
-pip install Flask-Cors
-pip install web3
-
-
-Second docker terminal
-docker run -it --detach --name ganachecli -p 8545:8545 ubuntu:latest
-docker start ganachecli           (docker exec -it <container> bash)
-apt update
-apt upgrade
-apt install nodejs
-apt install npm
-npm install -g ganache-cli
-ganache-cli -h 0.0.0.0
+1. First docker terminal
+- docker run -it --detach --name ubuntucon -p 5000:5000 ubuntu:latest
+- docker start ubuntucon           (docker start ubuntucon && docker attach ubuntucon)
+- apt update
+- apt upgrade
+- apt-get install build-essential
+- apt-get install python3
+- apt install python3-pip
+- apt-get install python3-dev libssl-dev libgmp-dev
+- pip install Flask-RESTful
+- pip install Flask-Cors
+- pip install web3
+```
+```
+2. Second docker terminal
+- docker run -it --detach --name ganachecli -p 8545:8545 ubuntu:latest
+- docker start ganachecli           (docker exec -it <container> bash)
+- apt update
+- apt upgrade
+- apt install nodejs
+- apt install npm
+- npm install -g ganache-cli
+- ganache-cli -h 0.0.0.0
+```
