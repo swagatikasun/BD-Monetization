@@ -1,10 +1,9 @@
 pragma solidity >=0.4.21 <0.6.0;
 
 contract Registration {
-    uint public lookup_id=0;
     uint public _d_id =0;
     uint public _u_id =0;
-    uint public _t_id=1;
+   
 
     struct data {
         string _data_name;
@@ -27,7 +26,7 @@ contract Registration {
         string _passWord;
         address _address;
         string _userType;
-        //uint rating =0;
+       
     }
     mapping(uint => User) public Users;
    
